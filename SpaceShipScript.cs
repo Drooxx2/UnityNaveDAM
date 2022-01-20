@@ -37,7 +37,7 @@ public class SpaceShipScript : MonoBehaviour
         if (Input.GetButton("Jump") && canShoot)
         {
             Debug.Log("Disparo!");
-            Vector2 missileSpawnPosition = new Vector2(transform.position.x, transform.position.y + 1f);
+            Vector2 missileSpawnPosition = new Vector2(transform.position.x, transform.position.y + 1.5f);
             missile = Instantiate(missilePrefab, missileSpawnPosition, Quaternion.identity);
             rbmissile = missile.GetComponent<Rigidbody2D>();
             rbmissile.AddForce(new Vector2(0, 1000));
@@ -45,13 +45,9 @@ public class SpaceShipScript : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    
+    public void SetcanShot()
     {
-        Debug.Log("ENTER");
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        Debug.Log("EXIT");
+        canShoot = true;
     }
 }
