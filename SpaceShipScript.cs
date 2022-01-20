@@ -9,6 +9,7 @@ public class SpaceShipScript : MonoBehaviour
     private Rigidbody2D _Rigidbody2D;
     private Rigidbody2D rbmissile;
     private GameObject missile;
+    private bool canShoot = true;
 
 
 
@@ -33,13 +34,24 @@ public class SpaceShipScript : MonoBehaviour
         transform.position = new Vector2(xPos, yPos);
 
         //Shoot a missile
-        if (Input.GetButton("Jump"))
+        if (Input.GetButton("Jump") && canShoot)
         {
             Debug.Log("Disparo!");
-            Vector2 missileSpawnPosition = new Vector2(transform.position.x, transform.position.y + 1.5f);
+            Vector2 missileSpawnPosition = new Vector2(transform.position.x, transform.position.y + 1f);
             missile = Instantiate(missilePrefab, missileSpawnPosition, Quaternion.identity);
             rbmissile = missile.GetComponent<Rigidbody2D>();
             rbmissile.AddForce(new Vector2(0, 1000));
+            canShoot = false;
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("ENTER");
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Debug.Log("EXIT");
     }
 }
