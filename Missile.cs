@@ -26,4 +26,9 @@ public class Missile : MonoBehaviour
 
         shipScript.SetcanShot();
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+    }
 }
