@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour
 {
     bool isRight = true;
     float limit = 6f;
+    public GameObject gameManager;
+    private GameManager _gameManager;
 
     #region Sleep
     private float sleep = 0.7f;
@@ -20,6 +22,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+        _gameManager = gameManager.GetComponent<GameManager>();
         StartCoroutine(Wait());
     }
 
@@ -62,7 +65,15 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(gameObject);
-        Destroy(collision.gameObject);
+
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            _gameManager.GameOver = true;
+        }
+        else
+        {
+            Destroy(gameObject);
+            Destroy(collision.gameObject);
+        }
     }
 }
