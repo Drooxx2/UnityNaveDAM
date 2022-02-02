@@ -74,6 +74,7 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
             Destroy(collision.gameObject);
+            _gameManager.GameWin = true;
         }
     }
 }
